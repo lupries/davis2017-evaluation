@@ -11,7 +11,7 @@ class DAVIS(object):
     DATASET_WEB = 'https://davischallenge.org/davis2017/code.html'
     VOID_LABEL = 255
 
-    def __init__(self, root, task='unsupervised', subset='val', sequences='all', resolution='480p', codalab=False):
+    def __init__(self, root, task='unsupervised', subset='val', sequences='all', resolution='480p', year='2016', codalab=False):
         """
         Class to read the DAVIS dataset
         :param root: Path to the DAVIS folder that contains JPEGImages, Annotations, etc. folders.
@@ -31,7 +31,7 @@ class DAVIS(object):
         self.img_path = os.path.join(self.root, 'JPEGImages', resolution)
         annotations_folder = 'Annotations' if task == 'semi-supervised' else 'Annotations_unsupervised'
         self.mask_path = os.path.join(self.root, annotations_folder, resolution)
-        year = '2019' if task == 'unsupervised' and (subset == 'test-dev' or subset == 'test-challenge') else '2017'
+        #year = '2019' if task == 'unsupervised' and (subset == 'test-dev' or subset == 'test-challenge') else '2017'
         self.imagesets_path = os.path.join(self.root, 'ImageSets', year)
 
         self._check_directories()
