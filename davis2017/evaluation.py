@@ -81,6 +81,7 @@ class DAVISEvaluation(object):
         results = Results(root_dir=res_path)
         for seq in tqdm(list(self.dataset.get_sequences())):
             all_gt_masks, all_void_masks, all_masks_id = self.dataset.get_all_masks(seq, True)
+            all_gt_masks = np.asarray(np.sum(all_gt_masks, axis=0, keepdims=True)>0, dtype=all_gt_masks.dtype)
             if self.task == 'semi-supervised':
                 all_gt_masks, all_masks_id = all_gt_masks[:, 1:-1, :, :], all_masks_id[1:-1]
             all_res_masks = results.read_masks(seq, all_masks_id)
